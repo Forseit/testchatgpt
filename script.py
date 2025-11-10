@@ -1,9 +1,11 @@
 """Sample solution script for the interactive test runner.
 
 The program reads an integer ``n`` that represents the number of values to
-follow.  It then reads ``n`` integers, one per line or separated by whitespace,
-and prints the sum of those integers.  The script is intentionally simple – it
-serves as a target for the generated tests driven by ``main.py``.
+follow. It then reads ``n`` integers, one per line or separated by whitespace,
+and checks whether the sum of the first two values is strictly greater than the
+sum of the remaining values.  The script prints ``"yes"`` when the condition
+holds and ``"no"`` otherwise.  The implementation serves as an example target
+for the generated tests driven by ``main.py``.
 
 Feel free to replace the implementation with your own solution when using the
 GUI runner.
@@ -52,8 +54,12 @@ def read_numbers(stream: typing.TextIO) -> list[int]:
 
 def main() -> None:
     numbers = read_numbers(sys.stdin)
-    total = sum(numbers)
-    print(total)
+    if len(numbers) < 2:
+        raise ValueError("Expected at least two numbers to compare their sums")
+
+    first_two_sum = numbers[0] + numbers[1]
+    remaining_sum = sum(numbers[2:])
+    print("yes" if first_two_sum > remaining_sum else "no")
 
 
 if __name__ == "__main__":

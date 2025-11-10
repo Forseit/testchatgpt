@@ -226,9 +226,15 @@ class Application(tk.Tk):
                 lines.append(",".join(numbers))
 
             if self.include_expected_var.get():
-                total = sum(int(value) for value in numbers)
+                values = [int(value) for value in numbers]
                 lines.append("=>")
-                lines.append(str(total))
+                if len(values) >= 2:
+                    first_two_sum = values[0] + values[1]
+                    remaining_sum = sum(values[2:])
+                    expected = "yes" if first_two_sum > remaining_sum else "no"
+                else:
+                    expected = "<недостаточно данных>"
+                lines.append(expected)
 
             lines.append("")
 
