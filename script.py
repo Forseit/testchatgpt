@@ -106,9 +106,8 @@ def main() -> None:
     Generates a random filename and a table of integers, writes the table to
     that file and prints the filename so that other programs can locate it.
     """
-    # Generate a table with a reasonable number of lines.  Ten lines
-    # provides sufficient data while keeping the file size modest.
-    table = generate_table(rows=10, cols=4)
+    # Generate 16k lines (16_000) with 4 numbers per line.
+    table = generate_table(rows=16_000, cols=4)
     filename = generate_filename()
     write_table_to_file(table, filename)
     # Print the filename for consumption by the caller.
